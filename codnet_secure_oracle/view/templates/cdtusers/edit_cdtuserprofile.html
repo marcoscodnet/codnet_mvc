@@ -1,0 +1,95 @@
+<!-- BEGIN:main -->
+
+<div id="editar">
+	<div align="justify"><p class="titulo">{title}</p></div>
+
+	<!-- BEGIN:msg -->
+	<script type="text/javascript">
+	showMessageError('{msg}', 1);
+	</script>
+	<!-- END:msg -->
+
+	<form name='editCdtUser' id='editCdtUser' action='doAction?action={submit}' method='post' onsubmit="return validate('editCdtUser');">
+		
+		<table>
+			<tr>
+				<td align="right">{cd_user_label}:</td>
+				<td align="left">
+					{cd_user}
+					<input type="hidden" name="cd_user" id="cd_user" value="{cd_user}"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">{ds_username_label}</td>
+				<td align="left">
+					{ds_username}
+					<input type='hidden' name='ds_username' id='ds_username' size='40' value="{ds_username}"/>
+				</td>
+			</tr>
+			
+						
+			<tr>
+				<td align="right">{ds_name_label}</td>
+				<td align="left">
+					<input type='text' name='ds_name' id='ds_name' size='40' value="{ds_name}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_email_label}</td>
+				<td align="left">
+					<input type='text' name='ds_email' id='ds_email' size='40' value="{ds_email}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_password_label}</td>
+				<td align="left">
+					<input type='password' name='ds_password' id='ds_password' size='40' />
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">{ds_new_password_label}</td>
+				<td align="left">
+					<input type='password' name='ds_new_password' id='ds_new_password' size='40'/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">{ds_repeat_new_password_label}</td>
+				<td align="left">
+					<input type='password' name='ds_repeat_new_password' id='ds_repeat_new_password' size='40'
+					jVal="{valid:function (val) { if ( val != eval('$(\'#ds_new_password\').val()') ) return false; else return true; }, message:'{invalid_passwords}'}"
+					/>
+				</td>
+			</tr>
+			
+						
+			<tr>
+				<td align="right">{ds_phone_label}</td>
+				<td align="left">
+					<input type='text' name='ds_phone' id='ds_phone' size='40' value="{ds_phone}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_address_label}</td>
+				<td align="left">
+					<input type='text' name='ds_address' id='ds_address' size='40' value="{ds_address}"/>
+				</td>
+			</tr>
+			
+		</table>
+		
+		<p style="text-align:center">
+			<input type='submit' name='{lbl_save}' value='{lbl_save}'/>
+			<input type='reset' name='{lbl_cancel}' value='{lbl_cancel}' onclick="javascript:window.location.href= 'doAction?action=home';"/>
+		</p>
+		
+		
+	</form>		
+	<div class="camposRequeridos">(*) {msg_required_fields}</div>
+</div>
+<!-- END:main -->

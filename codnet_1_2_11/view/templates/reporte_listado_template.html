@@ -1,0 +1,49 @@
+<!-- BEGIN: main -->
+<div id="{divId}">
+
+<div class="paginas">
+	<div style="float:left">
+	<!-- BEGIN: PAG --> {PAG} <!-- END: PAG -->	
+	</div>
+	<!-- BEGIN: resultado --> {resultado} <!-- END: resultado -->
+</div>
+<br />
+<!-- BEGIN: exportar -->
+<div class='botones_reporte'>
+<!-- BEGIN: excel -->
+<input type="button" name="imprimir"  id="imprimir" value="Exportar xls" onclick="javascript:submit_blank('{accion_excel}');" >
+<!-- END: excel -->
+<!-- BEGIN: pdf -->
+<input type="button" name="exportar"  id="exportar" value="Exportar pdf" onclick="javascript:submit_blank('{accion_pdf}');">
+<!-- END: pdf -->
+</div>
+<!-- END: exportar -->
+
+<div class="tablaCentro">
+<table class="tablaListado" border="1">
+	<tr>
+		<th colspan="{columnCount}">{titulo}</th>
+	</tr>	
+	<tr>
+		<!-- BEGIN: TH -->		
+		<th>{encabezado} &nbsp; <a
+			href="{urlASC}"> <img
+			class="hrefImg" title="Ordenar por {ordenar_por} asc"
+			src="{WEB_PATH}img/orden_asc.gif" align="absmiddle"/></a>&nbsp; <a
+			href="{urlDESC}"> <img
+			class="hrefImg" title="Ordenar por {ordenar_por} desc"
+			src="{WEB_PATH}img/orden_desc.gif" align="absmiddle"/> </a></th>
+		<!-- END: TH -->
+	</tr>
+	<!-- BEGIN: row -->
+	<tr>
+		<!-- BEGIN: column -->
+		<td>{value}</td>
+		<!-- END: column -->
+	</tr>
+	<!-- END: row -->
+</table>
+</div>
+</div>
+
+<!-- END: main -->

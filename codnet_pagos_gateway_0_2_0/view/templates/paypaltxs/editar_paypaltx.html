@@ -1,0 +1,81 @@
+<!-- BEGIN:main -->
+<div id="editar">
+	<div align="justify"><p class="titulo">{titulo}</p></div>
+
+	<!-- BEGIN:msj -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msj}
+		</p>
+	</div>
+	<br />
+	<!-- END:msj -->
+
+	<form name='editarpaypalTx' id='editarpaypalTx' action='doAction?action={submit}' method='post' onsubmit="return validate('editarpaypalTx');">
+		
+		<table>
+			<tr>
+				<td align="right">{cd_paypal_tx_label}:</td>
+				<td align="left">
+					{cd_paypal_tx}
+					<input type="hidden" readonly name="cd_paypal_tx" id="cd_paypal_tx" value="{cd_paypal_tx}"/>
+				</td>
+			</tr>
+			
+						
+			<tr>
+				<td align="right">{cd_paypal_tx_label}</td>
+				<td align="left">
+					<input type='text' name='cd_paypal_tx' id='cd_paypal_tx' size='40' value="{cd_paypal_tx}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_txn_id_label}</td>
+				<td align="left">
+					<input type='text' name='ds_txn_id' id='ds_txn_id' size='40' value="{ds_txn_id}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{cd_pago_label}</td>
+				<td align="left">
+					<input type='text' name='cd_pago' id='cd_pago' size='40' value="{cd_pago}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_paypal_tx_label}</td>
+				<td align="left">
+					<input type='text' name='ds_paypal_tx' id='ds_paypal_tx' size='40' value="{ds_paypal_tx}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{dt_fecha_label}</td>
+				<td align="left">
+					<input type='text' name='dt_fecha' id='dt_fecha' size='40' value="{dt_fecha}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_type_label}</td>
+				<td align="left">
+					<input type='text' name='ds_type' id='ds_type' size='40' value="{ds_type}"/>
+				</td>
+			</tr>
+			
+			
+			
+		</table>
+		
+		<p style="text-align:center">
+			<input type='submit' name='submit' value='Aceptar'/>
+			<input type='reset' name='cancelar' value='Cancelar' onclick="javascript:window.location.href= 'doAction?action=listar_paypaltxs';"/>
+		</p>
+		
+		
+	</form>		
+	<div class="camposRequeridos">(*) Campos requeridos</div>
+</div>
+<!-- END:main -->

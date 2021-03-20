@@ -1,0 +1,82 @@
+<!-- BEGIN:main -->
+<div id="editar">
+	<div align="justify"><p class="titulo">{titulo}</p></div>
+
+	<!-- BEGIN:msj -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msj}
+		</p>
+	</div>
+	<br />
+	<!-- END:msj -->
+
+	<form name='editarpago' id='editarpago' action='doAction?action={submit}' method='post' onsubmit="return validate('editarpago');">
+		
+		<table>
+			<tr>
+				<td align="right">{cd_pago_label}:</td>
+				<td align="left">
+					{cd_pago}
+					<input type="hidden" readonly name="cd_pago" id="cd_pago" value="{cd_pago}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{dt_fecha_label} *</td>
+				<td align="left">
+					<input type='text' name='dt_fecha' id='dt_fecha' size='40' value="{dt_fecha}" jVal="{valid:function (val) { return requerido(val,'Ingrese un valor'); }}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{dt_fechacambioestado_label} *</td>
+				<td align="left">
+					<input type='text' name='dt_fechacambioestado' id='dt_fechacambioestado' size='40' value="{dt_fechacambioestado}" jVal="{valid:function (val) { return requerido(val,'Ingrese un valor'); }}"/>
+				</td>
+			</tr>
+			
+			
+						
+			<tr>
+				<td align="right">{cd_estadopago_label} *</td>
+				<td align="left">
+					<select name='cd_estadopago' id='cd_estadopago'>
+						<!-- BEGIN: estadopagos_option -->				
+						<option value={cd_estadoPago}>{ds_estadoPago}</option>
+						<!-- END: estadopagos_option -->
+					</select>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_descripcion_label} *</td>
+				<td align="left">
+					<input type='text' name='ds_descripcion' id='ds_descripcion' size='40' value="{ds_descripcion}" />
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{cd_usuario_label} *</td>
+				<td align="left">
+					<select name='cd_usuario' id='cd_usuario'>
+						<!-- BEGIN: usuarios_option -->				
+						<option value={cd_usuario}>{ds_usuario}</option>
+						<!-- END: usuarios_option -->
+					</select>
+				</td>
+			</tr>
+			
+			
+		</table>
+		
+		<p style="text-align:center">
+			<input type='submit' name='submit' value='Aceptar'/>
+			<input type='reset' name='cancelar' value='Cancelar' onclick="javascript:window.location.href= 'doAction?action=listar_pagos';"/>
+		</p>
+		
+		
+	</form>		
+	<div class="camposRequeridos">(*) Campos requeridos</div>
+</div>
+<!-- END:main -->

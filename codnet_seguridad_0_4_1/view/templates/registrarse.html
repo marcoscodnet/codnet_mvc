@@ -1,0 +1,148 @@
+<!-- BEGIN: main -->
+<script>
+function validar(){
+
+
+	//result = validate('altausuario') && (form.acepta.checked);
+	form = document.getElementById('altausuario');
+	result = validate('altausuario') && (form.acepta.checked);
+	
+	if(!result){		
+		document.getElementById('msgObligatorios').style.setProperty('display', 'inline', 'important');
+
+		if(!form.acepta.checked)
+			jAlert("Debe leer y aceptar las reglas del concurso");
+	}
+	
+	return result;
+	
+	
+}
+
+</script>
+<style>
+
+.jfVal {
+    display: none;
+}
+
+.jValSpacercover {
+    display: none;
+}
+</style>
+
+<div id="editar">
+
+	<!-- <div align="justify"><p class="titulo">Registraci&oacute;n de Usuario</p></div>-->
+
+	
+	<!-- BEGIN: msj -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msj}
+		</p>
+	</div>
+	<br />
+	<!-- END: msj -->
+	<div class="{tab_class}">
+		<img src="{WEB_PATH}css/ugc/images/dot.gif" width="630" height="30" usemap="#Map"/>
+		<map name="Map" id="Map">
+		    <area shape="poly" coords="208,0,411,0,435,29,232,29" href="{WEB_PATH}{pais}/login_web_init.html" alt="Ingresar" title="Ingresar"/>
+  			<area shape="poly" coords="412,0,630,0,630,29,436,29" href="{WEB_PATH}{pais}/subir_foto_init.html" alt="Sube tu foto" title="Sube tu foto"/>
+		</map>
+	</div>
+	<div class="divTabsInterior">
+	<form name='altausuario' id='altausuario' action='registrarse.html' onsubmit="return validar();" method='post'>
+		<table>
+		    <tr>
+				<td colspan="2"><div class="txtTituloTab">Informaci&oacute;n Personal <div id="msgObligatorios" style="display:none; color:red;font-size:80%; margin-left: 40px;">Completa los campos obligatorios</div></div></td>
+			</tr>
+			<tr>
+				<td align="right">Nombre y Apellido*</td>
+				<td align="left">
+					<input type='text' name='apynom' id='apynom' value='{ds_apynom}' size='60'
+					 jVal="{valid:function (val) { return requerido(val,'Ingrese su nombre y apellido'); }}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Correo Electr&oacute;nico*</td>
+				<td align="left">
+				<input type='text' name='mail' id='mail'  value='{ds_mail}' size='60' 
+		 				jVal="{valid:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message:'Invalid Email Address', styleType:'cover'}"
+                                                jValKey="{valid:/[a-zA-Z0-9._%+-@]/, cFunc:'alert', cArgs:['Email Address: '+$(this).val()]}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Tel&eacute;fono:</td>
+				<td align="left">
+					<input type='text' name='telefono' id='telefono' value='{ds_telefono}' size='60'/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Direcci&oacute;n:</td>
+				<td align="left">
+					<input type='text' name='domicilio' id='domicilio' value='{ds_domicilio}' size='60'/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Pa&iacute;s:</td>
+				<td align="left">
+					<select name='pais' id='pais'>
+						<option value=""> -- Seleccione uno -- </option>
+						<!-- BEGIN: option_pais -->				
+						<option value={cd_pais}>{ds_pais}</option>
+						<!-- END: option_pais -->
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Contrase&ntilde;a*</td>
+				<td align="left">
+					<input type='password' name='pass' id='pass'  size='60'
+					 jVal="{valid:function (val) { return requerido(val,'Ingrese una Contrase&ntilde;a'); }}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Repetir Contrase&ntilde;a*</td>
+				<td align="left">
+					<input type='password' name='pass2' id='pass2'  size='60'
+					jVal="{valid:function (val) { if ( val != eval('$(\'#pass\').val()') ) return false; else return true; }, message:'Las contrase&ntilde;as no coinciden'}"
+					/>
+				</td>
+			</tr>
+		
+			<tr>
+				<td align="right">C&oacute;digo de Seguridad*</td>
+				<td >
+					<img id="siimage" align="left" style="padding-right: 5px; border: 0" src="{WEB_PATH}captcha/securimage_show.php?sid={sid_captcha}" />
+					<a tabindex="-1" style="border-style: none" href="#" title="Cambiar Imagen" onClick="document.getElementById('siimage').src = '{WEB_PATH}captcha/securimage_show.php?sid=' + Math.random(); return false"><img src="{WEB_PATH}captcha/images/refresh.gif" alt="Reload Image" border="0" onClick="this.blur()" align="bottom" /></a>
+				</td>				
+			</tr>
+
+			<tr>
+				<td align="right"></td>
+				<td align="left">
+					<input type='input' name='captcha' id='captcha'  size='60'
+					 jVal="{valid:function (val) { return requerido(val,'Ingrese el C&oacute;digo de seguridad'); }}"/>				</td>				
+			</tr>
+
+		</table>
+
+		<br />
+		<p style="text-align:right; padding-right:5px; ">
+			<button style="" class="submit" value="Registrarme" type="submit" id="submit">Registrarme</button>
+		</p>
+
+		<p style="padding-left:10px; font-family: Arial, helvetica, sans-serif; font-size: 12px; color: #666666;">
+			<input type="checkbox" name="acepta" jVal="{valid:function (val) { return requerido(val,'Ingrese su nombre y apellido'); }}"> He le&iacute;do y acepto las reglas del concurso. </input><a style="font-weight: bold; color:#666666; text-decoration: none" href="{WEB_PATH}{pais}/reglas_premios.html" target="_blank">Haz click para leer</a></p>
+		<br />
+		<div class="camposRequeridos">* Campos obligatorios</div>		
+	</form>
+	</div>
+</div>
+<div style="padding-right: 40px;">
+{galeria_entradas}
+</div>
+
+<!-- END: main -->
+

@@ -1,0 +1,68 @@
+<!-- BEGIN:main -->
+<!-- hay que incluir el js y el css del autocomplete. -->
+<script language="javascript" src="{WEB_PATH}js/autocomplete/simpleAutoComplete.js"></script>
+<link rel="stylesheet" href="{WEB_PATH}css/autocomplete/simpleAutoComplete.css" type="text/css" />
+<script>
+
+
+function accion_change(attr){
+	document.getElementById('ds_accion').value = attr[0];
+	document.getElementById('accion').innerHTML = attr[0];
+}
+
+function funcion_change(attr){
+	document.getElementById('cd_funcion').value = attr[0];
+	document.getElementById('funcion').innerHTML = attr[0] + " - " + attr[1];	 
+}
+</script>
+
+<div id="editar">
+	<div align="justify"><p class="titulo">{titulo}</p></div>
+
+	<!-- BEGIN:msj -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msj}
+		</p>
+	</div>
+	<br />
+	<!-- END:msj -->
+
+	<form name='editaraccionFuncion' id='editaraccionFuncion' action='doAction?action={submit}' method='post' onsubmit="return validate('editaraccionFuncion');">
+		
+		<table>
+			<tr>
+				<td align="right">{cd_accionfuncion_label}:</td>
+				<td align="left">
+					{cd_accionfuncion}
+					<input type="hidden" readonly name="cd_accionfuncion" id="cd_accionfuncion" value="{cd_accionfuncion}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_accion_label} *</td>
+				<td align="left">
+					{autocomplete_accion}
+					<input size="20" type="hidden" name='ds_accion' id='ds_accion' value="{ds_accion}"/>
+					<div id="accion"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">{cd_funcion_label} *</td>
+				<td align="left">
+					{find_funcion}
+				</td>
+			</tr>
+			
+		</table>
+		
+		<p style="text-align:center">
+			<input type='submit' name='submit' value='Aceptar'/>
+			<input type='reset' name='cancelar' value='Cancelar' onclick="javascript:window.location.href= 'doAction?action=listar_accionfunciones';"/>
+		</p>
+		
+		
+	</form>		
+	<div class="camposRequeridos">(*) Campos requeridos</div>
+</div>
+<!-- END:main -->

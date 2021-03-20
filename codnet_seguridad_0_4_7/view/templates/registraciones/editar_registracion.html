@@ -1,0 +1,99 @@
+<!-- BEGIN:main -->
+<div id="editar">
+	<div align="justify"><p class="titulo">{titulo}</p></div>
+
+	<!-- BEGIN:msj -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msj}
+		</p>
+	</div>
+	<br />
+	<!-- END:msj -->
+
+	<form name='editarregistracion' id='editarregistracion' action='doAction?action={submit}' method='post' onsubmit="return validate('editarregistracion');">
+		
+		<table>
+			<tr>
+				<td align="right">{cd_registracion_label}:</td>
+				<td align="left">
+					{cd_registracion}
+					<input type="hidden" readonly name="cd_registracion" id="cd_registracion" value="{cd_registracion}"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">{ds_nomusuario_label} *</td>
+				<td align="left">
+					<input type='text' name='ds_nomusuario' id='ds_nomusuario' size='40' value="{ds_nomusuario}"
+					jVal="{valid:function (val) { return requerido(val,'Ingrese un valor'); }}"/>
+				</td>
+			</tr>
+					
+			<tr>
+				<td align="right">{ds_apynom_label} *</td>
+				<td align="left">
+					<input type='text' name='ds_apynom' id='ds_apynom' size='40' value="{ds_apynom}"
+					jVal="{valid:function (val) { return requerido(val,'Ingrese un valor'); }}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_mail_label} *</td>
+				<td align="left">
+					<input type='text' name='ds_mail' id='ds_mail' size='40' value="{ds_mail}"
+					jVal="{valid:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message:'El e-mail no es v&aacute;lido'}"
+                    jValKey="{valid:/[a-zA-Z0-9._%+-@]/, cFunc:'alert', cArgs:['E-mail: '+$(this).val()]}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_password_label} *</td>
+				<td align="left">
+					<input type='text' name='ds_password' id='ds_password' size='40' value="{ds_password}"
+					jVal="{valid:function (val) { return requerido(val,'Ingrese un valor'); }}"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">{ds_telefono_label}</td>
+				<td align="left">
+					<input type='text' name='ds_telefono' id='ds_telefono' size='40' value="{ds_telefono}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_domicilio_label}</td>
+				<td align="left">
+					<input type='text' name='ds_domicilio' id='ds_domicilio' size='40' value="{ds_domicilio}"/>
+				</td>
+			</tr>
+			
+			
+						
+			<tr>
+				<td align="right">{cd_pais_label}</td>
+				<td align="left">
+					<select name='cd_pais' id='cd_pais'>
+						<option value="null"> -- Seleccionar -- </option>
+						<!-- BEGIN: paises_option -->				
+						<option value={cd_pais}>{ds_pais}</option>
+						<!-- END: paises_option -->
+					</select>
+				</td>
+			</tr>
+			
+		</table>
+		
+		<p style="text-align:center">
+			<input type='hidden' name='ds_codigoactivacion' id='ds_codigoactivacion' size='40' value="{ds_codigoactivacion}"/>
+			
+			<input type='submit' name='submit' value='Aceptar'/>
+			<input type='reset' name='cancelar' value='Cancelar' onclick="javascript:window.location.href= 'doAction?action=listar_registraciones';"/>
+		</p>
+		
+		
+	</form>		
+	<div class="camposRequeridos">(*) Campos requeridos</div>
+</div>
+<!-- END:main -->

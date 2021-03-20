@@ -1,0 +1,164 @@
+----------------------------------------
+Instalación del módulo cdt_seguridad
+----------------------------------------
+
+1) definir las siguientes constantes
+
+define( CDT_SEGURIDAD_PATH, APP_PATH . CLASS_PATH . 'cdt_seguridad' );
+define( CDT_SEGURIDAD_LOGIN_TITULO, 'Mi APP' );
+define( CDT_SEGURIDAD_LOGIN_SUBTITULO, 'descripción de Mi APP' );
+define( CDT_SEGURIDAD_REGISTRARSE_TITULO, 'Mi APP' );
+define( CDT_SEGURIDAD_REGISTRARSE_SUBTITULO, 'descripción de Mi APP' );
+define( CDT_SEGURIDAD_PERFIL_DEFAULT_ID, id_perfil_default ) ;
+
+//en caso de querer redefinir el dao de usuario:
+define( CDT_SEGURIDAD_USUARIO_QUERY_CLASSNAME, 'UsuarioQuery' );
+
+2) agregar el módulo al CLASS_PATH
+
+	$classpath[] =  CDT_SEGURIDAD_PATH ;
+	$classpath[] =  ...
+	define ( 'CLASS_PATH', implode(",", $classpath)  );
+
+
+
+3) incluir el archivo de configuración del módulo.
+
+include_once (CDT_SEGURIDAD_PATH . '/conf/init.php' )
+
+4) ejecutar el script tablas_seguridad.sql para crear tablas en la base de datos:
+
+	-funcion
+	-menugroup
+	-menuoption
+	-perfil
+	-perfilfuncion
+	-usuario
+
+5) mapear las acciones en el archivo de configuración de la aplicación "navigation.xml":
+
+
+	<!-- inicio y login -->
+	<accion nombre='login_init' clase='LoginInitAction' />
+	<accion nombre='login' clase='LoginAction' />
+	<forward nombre='login_success' url='doAction?action=inicio' />
+	<forward nombre='login_error' url='doAction?action=login_init' />
+
+	<accion nombre='inicio' clase='PanelAction'  menuGroupActivo=''/>
+	<accion nombre='salir' clase='SalirAction' />
+	<forward nombre='salir_success' url='doAction?action=login_init' />
+
+	<!-- registracion -->
+	<accion nombre='registrarse_init' clase='RegistrarseInitAction' />
+	<accion nombre='registrarse' clase='RegistrarseAction' />
+	<forward nombre='registrarse_success' url='doAction?action=inicio' />
+	<forward nombre='registrarse_error' url='doAction?action=registrarse_init' />
+
+	<!-- usuarios y perfiles -->
+	<accion_default entidad='usuario' plural='usuarios' menuGroups='' menuOptions='' menuGroupActivo='1'/>
+	<accion nombre='pdf_usuarios' clase='PDFUsuariosAction' />
+	<accion nombre='excel_usuarios' clase='ExcelUsuariosAction' />
+    <forward nombre='modificar_usuario_success' url='doAction?action=listar_usuarios' />
+	<forward nombre='modificar_usuario_error' url='doAction?action=listar_usuarios' />
+	
+	<accion_default entidad='perfil' plural='perfiles' menuGroups='' menuOptions='' menuGroupActivo='1'/>
+	<accion nombre='pdf_perfiles' clase='PDFPerfilesAction' />
+	<accion nombre='excel_perfiles' clase='ExcelPerfilesAction' />
+	
+	<accion nombre='cambiar_clave_init' clase='CambiarClaveInitAction'  menuGroupActivo='1'/>
+	<accion nombre='cambiar_clave' clase='CambiarClaveAction'  menuGroupActivo='1'/>
+	<forward nombre='cambiar_clave_success' url='doAction?action=panel_control' />
+	<forward nombre='cambiar_clave_error' url='doAction?action=cambiar_clave_init' />
+
+	<!-- accionFunciones -->
+    <accion nombre='listar_accionfunciones' clase='ListarAccionFuncionesAction' menuGroupActivo='1'/>
+    <accion nombre='alta_accionfuncion' clase='AltaAccionFuncionAction' />
+    <accion nombre='alta_accionfuncion_init' clase='AltaAccionFuncionInitAction' />
+    <accion nombre='modificar_accionfuncion' clase='ModificarAccionFuncionAction' />
+    <accion nombre='modificar_accionfuncion_init' clase='ModificarAccionFuncionInitAction' />
+    <accion nombre='ver_accionfuncion' clase='VerAccionFuncionAction' />
+    <accion nombre='eliminar_accionfuncion' clase='EliminarAccionFuncionAction' />
+    <accion nombre='pdf_accionfunciones' clase='PDFAccionFuncionesAction' />
+    <accion nombre='excel_accionfunciones' clase='ExcelAccionFuncionesAction' />
+    
+    <forward nombre='alta_accionfuncion_success' url='doAction?action=listar_accionfunciones' />
+    <forward nombre='alta_accionfuncion_error' url='doAction?action=alta_accionfuncion_init' />
+    <forward nombre='modificar_accionfuncion_success' url='doAction?action=listar_accionfunciones' />
+    <forward nombre='modificar_accionfuncion_error' url='doAction?action=alta_accionfuncion_init' />
+    <forward nombre='eliminar_accionfuncion_error' url='doAction?action=listar_accionfunciones' />
+    <forward nombre='eliminar_accionfuncion_success' url='doAction?action=listar_accionfunciones' />
+    <forward nombre='listar_accionfuncion_error' url='doAction?action=listar_accionfunciones' />
+	
+    <!-- funciones -->
+    <accion nombre='listar_funciones' clase='ListarFuncionesAction' menuGroupActivo='1'/>
+    <accion nombre='alta_funcion' clase='AltaFuncionAction' />
+    <accion nombre='alta_funcion_init' clase='AltaFuncionInitAction' />
+    <accion nombre='modificar_funcion' clase='ModificarFuncionAction' />
+    <accion nombre='modificar_funcion_init' clase='ModificarFuncionInitAction' />
+    <accion nombre='ver_funcion' clase='VerFuncionAction' />
+    <accion nombre='eliminar_funcion' clase='EliminarFuncionAction' />
+    <accion nombre='pdf_funciones' clase='PDFFuncionesAction' />
+    <accion nombre='excel_funciones' clase='ExcelFuncionesAction' />
+    
+    <forward nombre='alta_funcion_success' url='doAction?action=listar_funciones' />
+    <forward nombre='alta_funcion_error' url='doAction?action=alta_funcion_init' />
+    <forward nombre='modificar_funcion_success' url='doAction?action=listar_funciones' />
+    <forward nombre='modificar_funcion_error' url='doAction?action=alta_funcion_init' />
+    <forward nombre='eliminar_funcion_success' url='doAction?action=listar_funciones' />
+    <forward nombre='eliminar_funcion_error' url='doAction?action=listar_funciones' />
+    <forward nombre='listar_funcion_error' url='doAction?action=listar_funciones' />
+	
+    <!-- menugroups -->
+    <accion nombre='listar_menugroups' clase='ListarMenugroupsAction' menuGroupActivo='1'/>
+    <accion nombre='alta_menugroup' clase='AltaMenuGroupAction' />
+    <accion nombre='alta_menugroup_init' clase='AltaMenuGroupInitAction' />
+    <accion nombre='modificar_menugroup' clase='ModificarMenuGroupAction' />
+    <accion nombre='modificar_menugroup_init' clase='ModificarMenuGroupInitAction' />
+    <accion nombre='ver_menugroup' clase='VerMenuGroupAction' />
+    <accion nombre='eliminar_menugroup' clase='EliminarMenuGroupAction' />
+    <accion nombre='pdf_menugroups' clase='PDFMenugroupsAction' />
+    <accion nombre='excel_menugroups' clase='ExcelMenugroupsAction' />
+    
+    <forward nombre='alta_menugroup_success' url='doAction?action=listar_menugroups' />
+    <forward nombre='alta_menugroup_error' url='doAction?action=alta_menugroup_init' />
+    <forward nombre='modificar_menugroup_success' url='doAction?action=listar_menugroups' />
+    <forward nombre='modificar_menugroup_error' url='doAction?action=alta_menugroup_init' />
+    <forward nombre='eliminar_menugroup_error' url='doAction?action=listar_menugroups' />
+    <forward nombre='eliminar_menugroup_success' url='doAction?action=listar_menugroups' />
+    <forward nombre='listar_menugroup_error' url='doAction?action=listar_menugroups' />
+	
+    <!-- menuoptions -->
+    <accion nombre='listar_menuoptions' clase='ListarMenuoptionsAction' menuGroupActivo='1'/>
+    <accion nombre='alta_menuoption' clase='AltaMenuOptionAction' />
+    <accion nombre='alta_menuoption_init' clase='AltaMenuOptionInitAction' />
+    <accion nombre='modificar_menuoption' clase='ModificarMenuOptionAction' />
+    <accion nombre='modificar_menuoption_init' clase='ModificarMenuOptionInitAction' />
+    <accion nombre='ver_menuoption' clase='VerMenuOptionAction' />
+    <accion nombre='eliminar_menuoption' clase='EliminarMenuOptionAction' />
+    <accion nombre='pdf_menuoptions' clase='PDFMenuoptionsAction' />
+    <accion nombre='excel_menuoptions' clase='ExcelMenuoptionsAction' />
+	
+	<forward nombre='alta_menuoption_success' url='doAction?action=listar_menuoptions' />
+    <forward nombre='alta_menuoption_error' url='doAction?action=alta_menuoption_init' />
+    <forward nombre='modificar_menuoption_success' url='doAction?action=listar_menuoptions' />
+    <forward nombre='modificar_menuoption_error' url='doAction?action=alta_menuoption_init' />
+    <forward nombre='eliminar_menuoption_error' url='doAction?action=listar_menuoptions' />
+    <forward nombre='eliminar_menuoption_success' url='doAction?action=listar_menuoptions' />
+    <forward nombre='listar_menuoption_error' url='doAction?action=listar_menuoptions' />
+	
+
+	
+	<filter nombre='seguridad' clase='SecureFilter' />
+
+6) copiar las archivos de estilo en WEB_PATH/css:  
+
+	cdt_seguridad/css/*.*  a  WEB_PATH/css/
+
+7) copiar las archivos de script en WEB_PATH/js:  
+
+	cdt_seguridad/js/*.*  a  WEB_PATH/js/
+	
+9) dependencias:
+   
+    - cdt_geo (aún sin versión estable)
+	

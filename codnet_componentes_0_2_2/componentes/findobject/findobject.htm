@@ -1,0 +1,103 @@
+<!-- BEGIN: main -->
+
+<!-- buscar {inputId} -->
+<div id="div_{inputId}">
+<script type="text/javascript">
+
+	function buscar_{inputId}(url) {
+		url = "doAction?action=cmp_findpopup&tableModel={tableModel}&onSeleccionar={onSeleccionar}&requestClass={requestClass}&itemCode={itemCode}&itemLabel={itemLabel}";
+        var dialogOpts = {
+                title : "Buscar",
+                modal : true,
+                autoOpen : false,
+                bgiframe : true,
+                height : 600,
+                width : 800,
+                open : function() {
+                    jQuery("#popup").load(url);
+                }
+            };
+            jQuery("#popup").children().remove();
+            jQuery("#popup").dialog("destroy");
+            jQuery("#popup").dialog(dialogOpts);
+            jQuery("#popup").dialog("open");
+	
+	}
+	
+	function restults_{inputId}(data) {
+
+		if(data.find){
+			$("#ds_{inputId}").attr('value', data.label);
+			$("#info_{inputId}").html('');
+		}
+		else{
+			$("#ds_{inputId}").attr('value', '' );
+			$("#info_{inputId}").html(data.msg);
+		}  
+		
+	    
+	}
+
+	function autocomplete_change_{inputId}(code){
+		$("#{inputId}").attr('value', code);
+		$("#{inputId}").blur();
+	}
+
+	$(document).ready(function(){
+		
+		$('#{inputId}').blur(function() {
+			var query = $(this).val();
+
+		  	
+		  	$.ajax({
+			      data: "query=" + query + "&requestClass={requestClass}&requestMethod={requestMethod}&itemClass={itemClass}&itemCode={itemCode}&itemLabel={itemLabel}&inputName={inputName}",
+			      type: "GET",
+			      dataType: "json",
+			      url: "doAction?action=cmp_findobject",
+			      success: function(data){
+			      	restults_{inputId}(data);
+			      }
+			      });
+		});
+
+		
+      });
+
+
+
+	
+		
+</script> 
+
+<style type="text/css">
+/*para que no muestre el texto de la validación en el código*/
+div#code .jfVal, .jValSpacercover {
+    display: none;
+}
+</style>
+
+<!-- BEGIN: label --> <span class="{labelCss}">{label}:</span> <!-- END: label -->
+
+<!-- input para ingresar el código. -->
+<div id="code" style="display:inline;"> 
+<input type="{code_type}" class="{inputCss}" name="{inputName}" id="{inputId}" size="{inputSize}" value="{inputValue}" {code_obligatorio}/> 
+</div>
+
+<!-- input para mostrar la descripción de la entidad encontrada -->
+{autocomplete}
+<!-- 
+<input type="text" size="30" class="{inputCss}" readonly name="ds_{inputId}" id="ds_{inputId}" value="{inputValueDesc}" size="{inputLabelSize}" {desc_obligatorio}/>
+ -->
+
+<!-- link para buscar la entidad con un popup -->
+<!-- BEGIN:popup --> 
+<a href="#"	onclick='buscar_{inputId}();'> 
+	<img class="hrefImg" src="{WEB_PATH}/css/findobject/search.gif" /> 
+</a>
+<div style="display: none;" id="popup"></div>
+<!-- END:popup -->
+<div id="info_{inputId}"></div>
+
+</div>
+<!-- fin buscar_{inputId} -->
+<!-- END: main -->

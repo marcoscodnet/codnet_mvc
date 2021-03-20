@@ -1,0 +1,39 @@
+----------------------------------------
+Instalación del módulo cdt_jasper
+----------------------------------------
+
+1) agregar el módulo al CLASS_PATH
+
+	$classpath[] =  cdt_JASPER_PATH ;
+	$classpath[] =  ...
+	define ( 'CLASS_PATH', implode(",", $classpath)  );
+	
+
+
+2) incluir el archivo de configuración del módulo.
+
+include_once (cdt_JASPER_PATH . '/conf/init.php' )
+
+
+3) setear las siguientes constantes. 
+
+define( 'cdt_JASPER_PATH', APP_PATH . CLASS_PATH . 'cdt_jasper/' );
+define ("JASPER_USER" , "superuser"  );
+define ("JASPER_PWD" , "superuser"  );
+define ("JASPER_URI" , "/organizations/mj/reports"  );
+define ("JASPER_SEVER_IP" , "localhost"  );
+
+
+4) mapear las acciones en el archivo de configuración de la aplicación "navigation.xml":
+
+	<!-- reportes jasper-->
+	<accion nombre='listar_reportesJasper' clase='ListarReportesJasperAction' menuGroups='' menuOptions='' menuGroupActivo='2'/>
+	<accion nombre='ver_filtroReporteJasper' clase='VerFiltroReporteJasperAction' menuGroups='' menuOptions='' menuGroupActivo='2'/>
+	<accion nombre='ver_reporteJasper' clase='VerReporteJasperAction' menuGroups='' menuOptions=''/>
+	<accion nombre='pdf_reportesJasper' clase='PDFReportesJasperAction' />
+	<accion nombre='excel_reportesJasper' clase='ExcelReportesJasperAction' />
+
+5) copiar las imágenes de jasper en WEB_PATH/images:  
+
+	cdt_jasper/images/*.*  a  WEB_PATH/images/
+	

@@ -1,0 +1,122 @@
+<!-- BEGIN: main -->
+<form action="{WEB_PATH}doAction"> 
+
+	<input type="hidden" name="uri" value="{REPORT_URI}">
+	<input type="hidden" name="action" value="ver_reporteJasper">
+	<input type="hidden" name="cd_datasource" value="{cd_datasource}">
+		
+	<div id="jasper_filtro">	
+	<table>
+
+		<tr>
+			<td colspan="3">
+			<h1>{REPORT_LABEL}</h1>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+			<h2>{REPORT_DESCRIPTION}</h2>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">
+			&nbsp;
+			</td>
+		</tr>
+	
+		<!-- BEGIN: param -->
+		<tr>  	
+			<td class="reportes_filtrar_label">{PARAM_LABEL}</td>
+			<td class="reportes_filtrar_value">
+						
+				<!-- BEGIN: param_boolean -->	
+				<input type="checkbox" value="true" name="{PARAM_NAME}" /> 
+				<!-- END: param_boolean -->	
+
+				<!-- BEGIN: param_single -->
+				<input type="text" name="{PARAM_NAME}" />
+				<!-- END: param_single -->
+
+				<!-- BEGIN: param_date -->
+			
+				<input type="text" name="{PARAM_NAME}" id="{PARAM_NAME}" /> 
+	
+				<script type="text/javascript">
+					$(function() {
+						$("#{PARAM_NAME}").datepicker({dateFormat:'dd/mm/yy'});
+					});
+				</script>
+	
+				<!-- para determinar que es una fecha -->	
+				<input type="hidden" name="{PARAM_NAME}_DATE" value="1">
+				<!-- END: param_date -->
+
+				<!-- BEGIN: param_datetime -->
+				<input type="text" name="{PARAM_NAME}" id="{PARAM_NAME}" /> 
+				<script type="text/javascript">
+					$(function() {
+						$("#{PARAM_NAME}").datepicker({dateFormat:'dd/mm/yy'});
+					});
+				</script>
+				<!-- END: param_datetime -->
+				
+				<!-- BEGIN: param_lov -->
+				<select name="{PARAM_NAME}" >
+					<!-- BEGIN: option -->
+						<option value="{LOV_VALUE}"> {LOV_LABEL} </option>
+					<!-- END: option -->				
+				</select>
+				<!-- END: param_lov -->
+				
+				<!-- BEGIN: param_query_lov -->
+				<select name="{PARAM_NAME}">
+					<!-- BEGIN: option -->
+						<option value="{LOV_VALUE}"> {LOV_LABEL} </option>
+					<!-- END: option -->				
+			 	</select>
+				<!-- END: param_query_lov -->
+			</td>
+				
+	
+			<td>{PARAM_DESCRIPION}</td>
+		</tr>
+		<!-- END: param -->
+		
+		<tr>
+			<td class="reportes_filtrar_label">Formato del reporte</td>
+			<td colspan="2" class="reportes_filtrar_value">
+			
+				<ul class="lista_formato_jasper">
+					<li>
+						<INPUT TYPE=RADIO NAME="format" checked VALUE="PDF"> <img src="images/pdf.png" class="no-border" alt="pdf" title="pdf" /> <br />
+					</li>
+					<li>
+						<INPUT TYPE=RADIO NAME="format" VALUE="XLS"> <img src="images/xls.png" class="no-border" alt="xls" title="xls" /> <br>
+					</li>
+					<li>
+						<INPUT CHECKED TYPE=RADIO NAME="format" VALUE="HTML"> <img src="images/lcd.png" class="no-border" alt="en pantalla" title="en pantalla" />
+					</li>
+					
+				</ul>
+			</td>
+		</tr>
+		<!-- 
+		<tr>
+			<td id="reportes_filtrar_label">Fuente de datos</td>
+			<td colspan="2" class="reportes_filtrar_value">
+				<INPUT CHECKED TYPE=RADIO NAME="fuente" VALUE="online"> Base de datos online <br />
+				<INPUT TYPE=RADIO NAME="fuente" VALUE="offline"> Base de datos offline (Hist&oacute;rico)
+			</td>
+		</tr> -->
+		<tr>
+			<td colspan=3 class="reportes_filtrar_btn"><input type="submit"
+				value="Ver reporte"> &nbsp;&nbsp;
+			<input type="button" onclick="javascript: history.back();"
+				value="Volver"></td>	
+		</tr>
+	</table>
+	</div>
+</form>
+
+<!-- END: main -->

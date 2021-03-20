@@ -1,0 +1,63 @@
+<!-- BEGIN: main -->
+<link rel="stylesheet" href="{WEB_PATH}css/screensmall.css" type="text/css" />
+<link rel="stylesheet" href="{WEB_PATH}css/calendar.css" type="text/css" />
+<link media="all" rel="stylesheet" href="{WEB_PATH}css/sexyalertbox.css" type="text/css" />
+<script type="text/javascript" src="{WEB_PATH}js/mootools.js"></script>
+<script type="text/javascript" src="{WEB_PATH}js/calendar.js"></script>
+<script type="text/javascript" src="{WEB_PATH}js/moocheck.js"></script>
+<script type="text/javascript" src="{WEB_PATH}js/fValidator.js"></script>
+<script type="text/javascript" src="{WEB_PATH}js/sexyalertbox.v1.js"></script>
+<script type="text/javascript">
+window.addEvent("domready", function() {
+	var exValidatorA = new fValidator("buscar");
+});
+</script>
+
+<div class="titulo_reporte">{titulo}</div>
+
+<form name="buscar" id="buscar" action="doAction" method="GET" class="fValidator-form">
+	<input type="hidden" name="accion" id="accion" value="{accion_reporte}" />
+	<!-- BEGIN: criterio -->
+	<div class='criterio_reporte' >
+			{criterio}
+			<input type="button" name="buscar"  id="buscar" value="Buscar" onclick="javascript:submit_self('{accion_reporte}');">
+	</div>
+	<!-- END: criterio -->
+</form>
+
+<!-- BEGIN: header -->
+<div class='header_reporte' >{header}</div>
+<!-- BEGIN: exportar -->
+<div class='botones_reporte'>
+<!-- BEGIN: excel -->
+<input type="button" name="imprimir"  id="imprimir" value="Exportar xls" onclick="javascript:submit_blank('{accion_excel}');" >
+<!-- END: excel -->
+<!-- BEGIN: pdf -->
+<input type="button" name="exportar"  id="exportar" value="Exportar pdf" onclick="javascript:submit_blank('{accion_pdf}');">
+<!-- END: pdf -->
+</div>
+<!-- END: exportar -->
+<!-- END: header -->
+
+	<!-- BEGIN: listado -->
+	<div class='listado_reporte'>{listado}</div>
+	<!-- END: listado -->
+
+<!-- BEGIN: footer -->
+<!-- BEGIN: exportar -->
+<div class='botones_reporte'>
+<!-- BEGIN: excel -->
+	<input type="button" name="imprimir"  id="imprimir" value="Exportar xls" onclick="javascript:submit_blank('{accion_excel}');" >
+<!-- END: excel -->
+<!-- BEGIN: pdf -->
+	<input type="button" name="exportar"  id="exportar" value="Exportar pdf" onclick="javascript:submit_blank('{accion_pdf}');">
+<!-- END: pdf -->	
+</div>
+<!-- END: exportar -->
+<div class='footer_reporte' >
+{footer}
+</div>
+<!-- END: footer -->
+
+
+<!-- END: main -->

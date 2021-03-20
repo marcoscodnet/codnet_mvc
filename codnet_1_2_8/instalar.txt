@@ -1,0 +1,57 @@
+----------------------------------------
+Instalación del módulo cdt_mvc
+----------------------------------------
+
+1) incluir el archivo de configuración del módulo.
+
+include_once (CDT_MVC_PATH . '/conf/init.php' )
+
+
+2) definir las siguientes constantes 
+
+define ( 'APP_PATH', $_SERVER ['DOCUMENT_ROOT'] . '/mi_app/' );
+define ( 'WEB_PATH', 'http://' . $_SERVER ['HTTP_HOST'] . '/mi_app/' );
+define ( 'CLASS_PATH', 'clases/com/' );
+
+
+define( CDT_MVC_APP_TITULO, 'Mi APP' );
+define( CDT_MVC_APP_SUBTITULO, 'descripción de Mi APP' );
+
+3) incluir el módulo al CLASS_PATH
+
+Por ejemplo, si el CLASS_PATH fuere "mi_app/classes/com", el módulo debe de
+quedar en "mi_app/classes/com/codnet"
+
+
+4) mapear las acciones en el archivo de configuración de la aplicación "navigation.xml":
+
+	<!-- pagina no encontrada -->
+	<accion nombre='page_not_found' clase='PageNotFoundAction' />
+		
+	<!-- acceso denegado -->
+	<accion nombre='acceso_denegado' clase='AccesoDenegadoAction' />
+		
+	<!-- pagina de error -->
+	<accion nombre='error' clase='ErrorAction' />
+	
+	
+	<!-- forwards -->
+	<forward nombre='page_not_found' url='doAction?action=page_not_fount' />
+	<forward nombre='acceso_denegado' url='doAction?action=acceso_denegado' />
+	<forward nombre='error' url='doAction?action=error' />
+
+
+5) copiar las carpetas "fpdf" y "fpdi" en WEB_PATH/:  
+
+	- cdt_mvc/fpdf  a  WEB_PATH/
+	- cdt_mvc/fpdi  a  WEB_PATH/
+
+
+6) copiar las imáganes en WEB_PATH/images:  
+
+	- cdt_mvc/images/*.*  a  WEB_PATH/images/
+	
+7) copiar los archivos de scripts en WEB_PATH/js:  
+
+	- cdt_mvc/js/*.*  a  WEB_PATH/js/
+	

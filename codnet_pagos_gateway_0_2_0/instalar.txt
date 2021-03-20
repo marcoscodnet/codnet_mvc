@@ -1,0 +1,106 @@
+----------------------------------------
+Instalación del módulo cdt_pagos_gateway
+----------------------------------------
+
+1) definir las siguientes constantes
+
+define( CDT_PAGOS_GATEWAY_PATH, APP_PATH . CLASS_PATH . 'cdt_pagos_gateway' );
+
+//para paypal
+define( CDT_PAGOS_GATEWAY_PAYPAL_PDT_IDENTITY_TOKEN, 'xxxxxxxxxxx' );
+
+//opcionales a redefinir
+define('CDT_PAGOS_GATEWAY_PAYPAL_URL', 'www.paypal.com');
+define('CDT_PAGOS_GATEWAY_PAYPAL_LOG_PATH', APP_PATH . 'paypal_log/');
+
+
+2) agregar el m�dulo al CLASS_PATH
+
+	$classpath[] =  CDT_PAGOS_GATEWAY_PATH ;
+	$classpath[] =  ...
+	define ( 'CLASS_PATH', implode(",", $classpath)  );
+
+
+
+3) incluir el archivo de configuración del módulo.
+
+include_once (CDT_PAGOS_GATEWAY_PATH . '/conf/init.php' )
+
+4) ejecutar el script tablas_pagos_gateway.sql para crear tablas en la base de datos:
+
+	-cdt_pagos_gateway_pago
+	-cdt_pagos_gateway_estadopago
+
+5) mapear las acciones en el archivo de configuración de la aplicación "navigation.xml":
+
+    <!-- paypal -->
+    <accion nombre='paypal_ipn' clase='PaypalIPNAction' />
+    <accion nombre='paypal_pdt' clase='PaypalPDTAction' />
+    <accion nombre='paypal_success' clase='PaypalSuccessAction' />
+    <accion nombre='paypal_canceled' clase='PaypalCanceledAction' />
+    <accion nombre='paypal_error' clase='PaypalErrorAction' />
+    
+    <forward nombre='paypal_pdt_success' url='paypal_success.html' />
+    <forward nombre='paypal_pdt_error' url='paypal_error.html' />
+    
+    
+    <!-- paypalTxs -->
+    <accion nombre='listar_paypaltxs' clase='ListarPaypalTxsAction' menuGroupActivo='6'/>
+    <accion nombre='ver_paypaltx' clase='VerPaypalTxAction' />
+    <accion nombre='pdf_paypaltxs' clase='PDFPaypalTxsAction' />
+    <accion nombre='excel_paypaltxs' clase='ExcelPaypalTxsAction' />
+    
+NOTA para acciones:
+
+5.1) Para modificar las páginas que visualizan el success o la cancelación de paypal, hay que redefinir:
+   
+    <accion nombre='paypal_success' clase='PaypalSuccessAction' />
+    <accion nombre='paypal_canceled' clase='PaypalCanceledAction' />
+
+
+5.2) Si queremos realizar algo específico en el proceso del pago en las notificaciones IPN:
+
+	<accion nombre='paypal_ipn' clase='MyPaypalIPNAction' />
+
+Tenemos que realizar nuestra acción que extienda de PaypalIPNAction y redefinir el método específico.
+ 
+Ejemplo:
+class MyPaypalIPNAction extends PaypalPNAction{
+
+	protected function processPaymentCompleted(Pago $oPago){
+		parent::processPaymentCompleted( $oPago );
+		
+		//acá nuestra procesamiento del pago.
+	}
+}
+
+5.3) Si queremos realizar algo específico en el proceso del pago en las notificaciones PDT:
+
+	<accion nombre='paypal_pdt' clase='MyPaypalPDTAction' />
+
+Tenemos que realizar nuestra acción que extienda de PaypalPDTAction.
+
+Ejemplo: 
+class MyPaypalIPNAction extends PaypalPNAction{
+
+	protected function processPaymentCompleted(Pago $oPago){
+		parent::processPaymentCompleted( $oPago );
+		
+		//acá nuestra procesamiento del pago.
+	}
+}
+	 
+
+6) copiar las archivos de estilo en WEB_PATH/css:  
+
+	cdt_seguridad/css/*.*  a  WEB_PATH/css/
+
+7) copiar las archivos de script en WEB_PATH/js:  
+
+	cdt_seguridad/js/*.*  a  WEB_PATH/js/
+	
+9) dependencias:
+   
+    - cdt_codnet_1_2_3
+    - cdt_seguridad_0_4_3.	
+	

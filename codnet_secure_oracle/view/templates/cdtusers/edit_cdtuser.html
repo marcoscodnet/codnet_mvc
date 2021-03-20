@@ -1,0 +1,92 @@
+<!-- BEGIN:main -->
+
+
+<script language="javascript" src="{WEB_PATH}js/autocomplete/simpleAutoComplete.js"></script>
+<link rel="stylesheet" href="{WEB_PATH}css/autocomplete/simpleAutoComplete.css" type="text/css" />
+
+
+<script type="text/javascript">
+function cdtusergroup_change(attr){
+	
+}
+</script>
+
+<div id="editar">
+	<div align="justify"><p class="titulo">{title}</p></div>
+
+	<!-- BEGIN:msg -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msg}
+		</p>
+	</div>
+	<br />
+	<!-- END:msg -->
+
+	<form name='editCdtUser' id='editCdtUser' action='doAction?action={submit}' method='post' onsubmit="return validate('editCdtUser');">
+		
+		<table>
+			<tr>
+				<td align="right">{cd_user_label}:</td>
+				<td align="left">
+					{cd_user}
+					<input type="hidden" readonly name="cd_user" id="cd_user" value="{cd_user}"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="right">{ds_username_label}  {ds_username_required}</td>
+				<td align="left">
+					<input type='text' name='ds_username' id='ds_username' size='40' value="{ds_username}" jVal="{valid:function (val) { return required(val,' {ds_username_required_msg}'); }}"/>
+				</td>
+			</tr>
+			
+						
+			<tr>
+				<td align="right">{ds_name_label}</td>
+				<td align="left">
+					<input type='text' name='ds_name' id='ds_name' size='40' value="{ds_name}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_email_label}</td>
+				<td align="left">
+					<input type='text' name='ds_email' id='ds_email' size='40' value="{ds_email}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_phone_label}</td>
+				<td align="left">
+					<input type='text' name='ds_phone' id='ds_phone' size='40' value="{ds_phone}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_address_label}</td>
+				<td align="left">
+					<input type='text' name='ds_address' id='ds_address' size='40' value="{ds_address}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{cd_usergroup_label} {cd_usergroup_required}</td>
+				<td align="left">
+					{CdtUserGroup_find}
+				</td>
+			</tr>
+			
+			
+		</table>
+		
+		<p style="text-align:center">
+			<input type='submit' name='{lbl_save}' value='{lbl_save}'/>
+			<input type='reset' name='{lbl_cancel}' value='{lbl_cancel}' onclick="javascript:window.location.href= 'doAction?action=list_cdtusers';"/>
+		</p>
+		
+		
+	</form>		
+	<div class="camposRequeridos">(*) {msg_required_fields}</div>
+</div>
+<!-- END:main -->

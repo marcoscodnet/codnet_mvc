@@ -1,0 +1,46 @@
+<!-- BEGIN:main -->
+<div id="editar">
+	<div align="justify"><p class="titulo">{titulo}</p></div>
+
+	<!-- BEGIN:msj -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msj}
+		</p>
+	</div>
+	<br />
+	<!-- END:msj -->
+
+	<form name='editarfuncion' id='editarfuncion' action='doAction?action={submit}' method='post' onsubmit="return validate('editarfuncion');">
+		
+		<table>
+			<tr>
+				<td align="right">{cd_funcion_label}:</td>
+				<td align="left">
+					{cd_funcion}
+					<input type="hidden" readonly name="cd_funcion" id="cd_funcion" value="{cd_funcion}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td align="right">{ds_funcion_label} *</td>
+				<td align="left">
+					<input type='text' name='ds_funcion' id='ds_funcion' size='40' value="{ds_funcion}" jVal="{valid:function (val) { return requerido(val,'Ingrese un valor'); }}"/>
+				</td>
+			</tr>
+			
+			
+			
+			
+		</table>
+		
+		<p style="text-align:center">
+			<input type='submit' name='submit' value='Aceptar'/>
+			<input type='reset' name='cancelar' value='Cancelar' onclick="javascript:window.location.href= 'doAction?action=listar_funciones';"/>
+		</p>
+		
+		
+	</form>		
+	<div class="camposRequeridos">(*) Campos requeridos</div>
+</div>
+<!-- END:main -->

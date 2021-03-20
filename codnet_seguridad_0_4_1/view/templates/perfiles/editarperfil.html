@@ -1,0 +1,58 @@
+<!-- BEGIN: main -->
+<div id="editar">
+	<div align="justify">
+		<p class="titulo">{titulo}</p>
+	</div>
+	<!-- BEGIN: msj -->
+	<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+			{msj}
+		</p>
+	</div>
+	<br />
+	<!-- END: msj -->
+	<form name='editarperfil' id='editarperfil' action='doAction?action={submit}' method='post' onsubmit="return validate('editarperfil');">			
+		<table>
+			
+			<tr>
+				<td colspan=2 align="right">
+					<p  style='display:{display_codigo};'>
+						C&oacute;digo: {cd_perfil}
+						<input type="hidden" name="cd_perfil" id="cd_perfil" value="{cd_perfil}"/>
+					</p>	
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Nombre de Perfil (*):</td>
+				<td align="left">
+					<input type='text' name='ds_perfil' id='ds_perfil' size='40' value="{ds_perfil}" jVal="{valid:function (val) { return requerido(val,'Ingrese un nombre'); }}"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="left">
+						<table>
+							<tr>
+								<th colspan="4">Funciones</th>
+							</tr>	
+					
+							<!-- BEGIN: row -->
+							<tr>
+								<!-- BEGIN: funciones -->
+								<td>
+									<p><label><input type="checkbox" value={cd_funcion} name="funciones[]"></input> {ds_funcion} </label></p>
+								</td>
+								<!-- END: funciones -->
+							</tr>
+							<!-- END: row -->
+						</table>
+				</td>								
+			</tr>
+		</table>
+			
+		<p style="text-align:center">
+			<input type='submit' name='submit' value='Aceptar' />
+			<input type='reset' name='cancelar' value='Cancelar' onclick="javascript:window.location.href= 'doAction?action=listar_perfiles';" />
+		</p>
+	</form>
+</div>
+<!-- END: main -->

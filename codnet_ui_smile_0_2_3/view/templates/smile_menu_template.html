@@ -1,0 +1,242 @@
+<!-- BEGIN: main -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{titulo}</title>
+<!-- BEGIN: meta_tag -->
+<meta http-equiv='{http_equiv}' content='{meta_content}' />
+<!-- END: meta_tag -->
+
+
+
+<!-- BEGIN: estilo -->
+<link rel="stylesheet" href="{css}" type="text/css" />
+<!-- END: estilo -->
+
+
+<!--[if lt IE 7]>
+<style type="text/css">
+.dock img { behavior: url({WEB_PATH}/js/jquery/iepngfix.htc) }
+</style>
+<![endif]-->
+
+
+<!-- BEGIN: script -->
+<script language="javascript" src="{js}"></script>
+<!-- END: script -->
+
+<script>
+function showMessageInfo( msg, hide ){
+	
+	$( "#layout_info_message" ).html( msg );
+
+	updated_right = ($(window).width() / 2) - ($( "#layout_info" ).width()/2);
+	$( "#layout_info" ).css({'right': updated_right});
+
+	
+	if( hide )
+		$( "#layout_info" ).show().delay(4000).slideUp(300);
+	else
+		$( "#layout_info" ).show();
+	
+	
+}
+
+function hideMessageInfo( ){
+	$( "#layout_info" ).slideUp(300);
+}
+
+function showMessageError( msg, hide ){
+	$( "#layout_error_message" ).html( msg );
+	
+	updated_right = ($(window).width() / 2) - ($( "#layout_error" ).width()/2);
+	$( "#layout_error" ).css({'right': updated_right});
+	
+	if( hide )
+		$( "#layout_error" ).show().delay(4000).slideUp(300);
+	else
+		$( "#layout_error" ).show();
+}
+
+function hideMessageError( ){
+	$( "#layout_error" ).slideUp(300);
+}
+
+</script>
+
+<!--dock menu JS options -->
+<script type="text/javascript">
+	
+	$(document).ready(
+		function()
+		{
+			resizeDock();
+			$(window).resize(function () {
+				
+				 resizeDock();	
+			});
+			
+			$('#dock').Fisheye(
+				{
+					maxWidth: 16,
+					items: 'a',
+					itemsText: 'span',
+					container: '.dock-container',
+					itemWidth: 32,
+					proximity: 30,
+					halign : 'center'
+				}
+			)
+			
+		}
+		
+		
+	);
+	
+	function resizeDock(){
+		var body_width = $(window).width();
+		var menu_width = $("#menuflotante").width();
+		
+		var menuleft= (body_width/2) - (menu_width/2);
+		
+		$('#menuflotante').css({'left': menuleft});		
+	}
+
+</script>
+
+
+</head>
+
+<body >
+
+	
+	<div id="sitebody">
+
+	<div id="header-wrapper">
+		<div id="header">
+			<div class="header-in">
+
+				<div class="left">
+					<div class="logo">
+						{header}
+					</div>
+					
+				</div>
+				
+				<div class="right">
+						<ul id="mainmenue">
+							<!-- BEGIN: menu_superior_derecha -->
+							<li class="{css_class}"><a href="doAction?action={action}"><span>{action_description}</span></a>
+							
+								<!-- BEGIN: hijos -->
+								<div class="submen">
+									<ul>
+										<!-- BEGIN: hijos_item -->
+										<li class="{css_class}"><a href="doAction?action={action}"><span>{action_description}</span></a></li>
+										<!-- END: hijos_item -->
+									</ul>
+								</div>
+								<!-- END: hijos -->
+								
+							</li>
+							<!-- END: menu_superior_derecha -->
+							<li class="logout">
+								<a href="doAction?action=exit"><span>{exit} {user}</span></a>								
+							</li>
+						</ul><!-- mainmenue end -->
+				</div> <!-- Right End -->
+
+			</div> <!-- Header-In End -->
+		</div> <!-- Header End -->
+	</div> <!-- Header-Wrapper End -->
+
+	<div id="contentwrapper">
+		<div class="tabswrapper">
+		
+			<!-- BEGIN: dock -->
+			<div id="menuflotante">
+			<div class="dock" id="dock">
+			  <div class="dock-container">
+					<!-- BEGIN: menu_lateral -->
+					<a  title="{action_description}" class="dock-item" href="{href}"><img src="css/images/{css_class}_48.png" alt="{action_description}" title="{action_description}" /><span>{action_description}</span></a>
+					<!-- END: menu_lateral -->
+			  </div> 
+			</div>
+			</div>	
+			<!-- END: dock -->
+		
+			<ul class="tabs">
+				<!-- BEGIN: menu_solapas -->
+				<li class="{css_li_class}"><a class="{css_a_class}" href="{href}"><span>{action_description}</span></a></li>
+				<!-- END: menu_solapas -->
+			</ul>
+						
+			<div id="layout_info" class="ui-state-highlight ui-corner-all mensaje_layout"> 
+				<p>
+				<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+				<span id="close" style="position: absolute; top: 0px; right: 0px;z-index: 501;">
+					<img src="{WEB_PATH}css/smile/images/close.png" style="cursor: pointer;" onclick="javascript:hideMessageInfo();" />
+				</span>
+				<span id="layout_info_message"></span>
+				</p>
+			</div>
+			<div id="layout_error" class="ui-state-error ui-corner-all mensaje_layout"> 
+				<p style="position: relative">
+				<span id="close" style="position: absolute; top: -20px; right: 0px;z-index: 501;">
+					<img src="{WEB_PATH}css/smile/images/close.png" style="cursor: pointer;" onclick="javascript:hideMessageError();" />
+				</span>
+				<span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+				<span id="layout_error_message"></span>
+				</p>
+			</div>
+									
+		</div>
+		
+		<div id="content-left">
+			<div id="content-left-in">
+	
+			<br /> 
+			{content}
+	
+			<br />
+			</div> <!-- content-left-in -->
+			
+			<div id="footer-wrapper">
+				<div class="footer">
+					<div class="footer-in">
+						{footer}
+					</div>
+				</div>
+			</div>
+			 
+		</div> <!-- content-left --> 
+
+	</div><!-- contentwrapper -->
+	</div> <!-- sitebody -->
+
+	<!-- 
+	<div id="footer-wrapper">
+		<div class="footer">
+			<div class="footer-in">
+				{footer}
+			</div>
+		</div>
+	</div>
+ 	-->
+ 	
+<!-- BEGIN:error_message -->
+<script>
+showMessageError( '{error_message}', false );
+</script>
+<!-- END:error_message -->
+
+<!-- BEGIN:info_message -->
+<script>
+showMessageInfo( '{info_message}', false );
+</script>
+<!-- END:info_message -->
+ 	
+</body>
+
+</html>
+<!-- END: main -->
